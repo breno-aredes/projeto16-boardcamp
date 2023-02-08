@@ -1,0 +1,36 @@
+{
+  "name": "projeto16-boardcamp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/breno-aredes/projeto16-boardcamp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/breno-aredes/projeto16-boardcamp/issues"
+  },
+  "homepage": "https://github.com/breno-aredes/projeto16-boardcamp#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^5.0.1",
+    "pg": "^8.9.0",
+    "uuid": "^9.0.0"
+  }
+}
