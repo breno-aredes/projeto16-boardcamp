@@ -9,4 +9,4 @@ server.use(express.json());
 
 const PORT = 5000;
 
-server.listen(PORT);
+server.listen(PORT, console.log("O servidor esta conectado na porta 5000"));
