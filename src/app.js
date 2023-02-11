@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
+import { customersRouter } from "./routes/customers.Routes";
 
 const server = express();
 server.use(cors());
 server.use(express.json());
 
-//server.use([])
+server.use([customersRouter]);
 
 const PORT = 5000;
 
