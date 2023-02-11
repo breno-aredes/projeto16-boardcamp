@@ -3,7 +3,7 @@ import {
   newCustomers,
   listCustomers,
   attCustomers,
-} from "../controllers/customersController";
+} from "../controllers/customersController,js";
 
 export const customersRouter = Router();
 
