@@ -23,7 +23,7 @@ customersRouter.post(
   newCustomers
 );
 customersRouter.put(
-  "/customers/id?",
+  "/customers/:id?",
   attCustomerValidate,
   validateSchema(customerSchema),
   attCustomers
