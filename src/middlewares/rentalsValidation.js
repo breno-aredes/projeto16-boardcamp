@@ -8,12 +8,14 @@ export async function rentalsValidate(req, res, next) {
       customerId,
     ]);
     const rentedGames = await db.query(
-      'SELECT count(id) as quantity FROM rentals WHERE "gameId" = $1 AND "returnDate" IS NULL',
+      'SELECT * FROM rentals JOIN games ON rentals."gameId" = games.id WHERE games.id = $1 AND rentals."returnDate" IS NULL;',
       [gameId]
     );
 
-    if (!game.rowCount || !customer.rowCount) return res.sendStatus(409);
-    if (game.stockTotal <= rentedGames.rowCount) return res.sendStatus(400);
+    if (!game.rowCount || !customer.rowCount) return res.sendStatus(400);
+    if (game.rows[0].stockTotal <= rentedGames.rowCount) {
+      return res.sendStatus(400);
+    }
     next();
   } catch (error) {
     res.status(500).send(error.message);
