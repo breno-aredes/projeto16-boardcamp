@@ -26,7 +26,7 @@ export async function attCustomerValidate(req, res, next) {
     ]);
     if (customerCpf.rowCount) {
       if (customerId.rows[0].cpf !== cpf) return res.sendStatus(409);
-      next();
+      return next();
     } else {
       return res.sendStatus(400);
     }
