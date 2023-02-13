@@ -1,6 +1,14 @@
 import { Router } from "express";
-import { listRentals, newRentals } from "../controllers/rentalsController.js";
-import { rentalsValidate } from "../middlewares/rentalsValidation.js";
+import {
+  attRentals,
+  deleteRentals,
+  listRentals,
+  newRentals,
+} from "../controllers/rentalsController.js";
+import {
+  rentalsAttValidate,
+  rentalsValidate,
+} from "../middlewares/rentalsValidation.js";
 import { validateSchema } from "../middlewares/ValidateSchema.js";
 import { rentalsSchema } from "../models/rentalsSchema.js";
 
@@ -13,3 +21,5 @@ rentalsRouter.post(
   rentalsValidate,
   newRentals
 );
+rentalsRouter.put("/rentals/:id/return", rentalsAttValidate, attRentals);
+rentalsRouter.delete("/rentals/:id?", deleteRentals);
