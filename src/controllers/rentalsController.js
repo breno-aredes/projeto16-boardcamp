@@ -1,15 +1,29 @@
 import { db } from "../database/database.connection.js";
+import dayjs from "dayjs";
 
 export async function listRentals(req, res) {
+  // try {
+  //   const rentals = await db.query("SELECT * FROM rentals;");
+  //   res.send(rentals.rows);
+  // } catch (error) {
+  //   res.status(500).send(error.message);
+  // }
+}
+
+export async function newRentals(req, res) {
+  const { customerId, gameId, daysRented } = req.body;
+
+  const game = await db.query('SELECT * FROM games WHERE "id" = $1', [gameId]);
+  const originalPrice = daysRented * game.pricePerDay;
   try {
-    const rentals = await db.query("SELECT * FROM rentals;");
-    res.send(rentals.rows);
+    await db.query(
+      'INSERT INTO rentals ("customerId", "gameId", "rentDate", "daysRented", "returnDate", "originalPrice", "delayFee") VALUES ($1, $2, $3, $4, null, $5, null)',
+      [customerId, gameId, dayjs().format(), daysRented, originalPrice]
+    );
   } catch (error) {
     res.status(500).send(error.message);
   }
 }
-
-export async function newRentals(req, res) {}
 
 export async function attRentals(req, res) {}
 
