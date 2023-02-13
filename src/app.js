@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { customersRouter } from "./routes/customers.Routes";
-import { gamesRouter } from "./routes/games.Routes";
+import { customersRouter } from "./routes/customers.Routes.js";
+import { gamesRouter } from "./routes/games.Routes.js";
 
 const server = express();
 server.use(cors());
