@@ -7,6 +7,7 @@ import {
 } from "../controllers/rentalsController.js";
 import {
   rentalsAttValidate,
+  rentalsDeleteValidate,
   rentalsValidate,
 } from "../middlewares/rentalsValidation.js";
 import { validateSchema } from "../middlewares/ValidateSchema.js";
@@ -22,4 +23,4 @@ rentalsRouter.post(
   newRentals
 );
 rentalsRouter.put("/rentals/:id/return", rentalsAttValidate, attRentals);
-rentalsRouter.delete("/rentals/:id?", deleteRentals);
+rentalsRouter.delete("/rentals/:id?", rentalsDeleteValidate, deleteRentals);

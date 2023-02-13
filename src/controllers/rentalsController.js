@@ -72,4 +72,13 @@ export async function attRentals(req, res) {
   }
 }
 
-export async function deleteRentals(req, res) {}
+export async function deleteRentals(req, res) {
+  const { id } = req.params;
+
+  try {
+    await db.query(`DELETE FROM rentals WHERE id=$1;`, [id]);
+    res.sendStatus(200);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}
