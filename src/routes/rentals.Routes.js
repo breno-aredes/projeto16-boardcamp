@@ -23,4 +23,4 @@ rentalsRouter.post(
   newRentals
 );
 rentalsRouter.put("/rentals/:id/return", rentalsAttValidate, attRentals);
-rentalsRouter.delete("/rentals/:id?", rentalsDeleteValidate, deleteRentals);
+rentalsRouter.delete("/rentals/:id", rentalsDeleteValidate, deleteRentals);
