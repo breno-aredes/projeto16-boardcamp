@@ -12,3 +12,17 @@ export async function customerValidate(req, res, next) {
     res.status(500).send(error.message);
   }
 }
+
+export async function attCustomerValidate(req, res, next) {
+  const { cpf } = req.body;
+  const { id } = req.params;
+  try {
+    const customerId = await db.query("SELECT * FROM customers where id = $1", [
+      id,
+    ]);
+    if (customerId.rows[0].cpf !== cpf) return res.sendStatus(409);
+    next();
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+}

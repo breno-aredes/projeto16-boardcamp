@@ -5,7 +5,10 @@ import {
   attCustomers,
   listCustomersById,
 } from "../controllers/customersController.js";
-import { customerValidate } from "../middlewares/customerValidation.js";
+import {
+  attCustomerValidate,
+  customerValidate,
+} from "../middlewares/customerValidation.js";
 import { validateSchema } from "../middlewares/ValidateSchema.js";
 import { customerSchema } from "../models/customerSchema.js";
 
@@ -19,4 +22,9 @@ customersRouter.post(
   validateSchema(customerSchema),
   newCustomers
 );
-customersRouter.put("/customers", attCustomers);
+customersRouter.put(
+  "/customers/id?",
+  attCustomerValidate,
+  validateSchema(customerSchema),
+  attCustomers
+);
