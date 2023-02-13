@@ -28,7 +28,7 @@ export async function rentalsAttValidate(req, res, next) {
     const rental = await db.query('SELECT * FROM rentals WHERE "id" = $1', [
       id,
     ]);
-    if (!rental) return res.sendStatus(404);
+    if (!rental.rowCount) return res.sendStatus(404);
     if (rental.rows[0].returnDate) return res.sendStatus(400);
     next();
   } catch (error) {
@@ -40,7 +40,7 @@ export async function rentalsDeleteValidate(req, res, next) {
   const { id } = req.params;
   try {
     const rental = await db.query(`SELECT * FROM rentals WHERE id = $1;`, [id]);
-    if (rental.rowCount == 0) return res.sendStatus(404);
+    if (!rental.rowCount) return res.sendStatus(404);
     if (!rental.rows[0].returnDate) return res.sendStatus(400);
     next();
   } catch (error) {
