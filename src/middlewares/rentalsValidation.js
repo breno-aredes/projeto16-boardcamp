@@ -4,7 +4,7 @@ export async function rentalsValidate(req, res, next) {
   const { customerId, gameId } = req.body;
   try {
     const game = await db.query(`SELECT * FROM games WHERE id=$1`, [gameId]);
-    const customer = await db.query(`SELECT * FROM customers WHERE id=$1`, [
+    const customer = await db.query(`SELECT * FROM customers WHERE id=$1;`, [
       customerId,
     ]);
     const rentedGames = await db.query(

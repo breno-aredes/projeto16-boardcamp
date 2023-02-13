@@ -9,7 +9,7 @@ export async function listRentals(req, res) {
     json_build_object('id', games.id, 'name', games.name) AS game
     FROM rentals
     JOIN games ON rentals."gameId" = games.id
-    JOIN customers ON rentals."customerId" = customers.id
+    JOIN customers ON rentals."customerId" = customers.id;
     `);
     res.send(rentals.rows);
   } catch (error) {
@@ -20,11 +20,11 @@ export async function listRentals(req, res) {
 export async function newRentals(req, res) {
   const { customerId, gameId, daysRented } = req.body;
 
-  const game = await db.query('SELECT * FROM games WHERE "id" = $1', [gameId]);
+  const game = await db.query('SELECT * FROM games WHERE "id" = $1;', [gameId]);
   const originalPrice = daysRented * game.rows[0].pricePerDay;
   try {
     await db.query(
-      'INSERT INTO rentals ("customerId", "gameId", "rentDate", "daysRented", "returnDate", "originalPrice", "delayFee") VALUES ($1, $2, $3, $4, null, $5, null)',
+      'INSERT INTO rentals ("customerId", "gameId", "rentDate", "daysRented", "returnDate", "originalPrice", "delayFee") VALUES ($1, $2, $3, $4, null, $5, null);',
       [
         customerId,
         gameId,
@@ -43,7 +43,7 @@ export async function attRentals(req, res) {
   const { id } = req.params;
 
   try {
-    const rental = await db.query('SELECT * FROM rentals WHERE "id" = $1', [
+    const rental = await db.query('SELECT * FROM rentals WHERE "id" = $1;', [
       id,
     ]);
     const game = await db.query(`SELECT * FROM games WHERE id = $1;`, [
