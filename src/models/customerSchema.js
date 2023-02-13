@@ -5,14 +5,13 @@ export const customerSchema = joi.object({
   phone: joi
     .string()
     .pattern(/^[0-9]+$/)
-    .required()
     .min(10)
-    .max(11),
+    .max(11)
+    .required(),
   cpf: joi
     .string()
     .pattern(/^[0-9]+$/)
-    .required()
-    .min(11)
-    .max(11),
+    .length(11)
+    .required(),
   birthday: joi.date().required(),
 });
