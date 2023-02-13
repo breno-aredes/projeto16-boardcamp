@@ -25,7 +25,7 @@ export async function rentalsValidate(req, res, next) {
 export async function rentalsAttValidate(req, res, next) {
   const { id } = req.params;
   try {
-    const rental = await db.query("SELECT * FROM rentals WHERE id=$1", [id]);
+    const rental = await db.query("SELECT * FROM rentals WHERE id=$1;", [id]);
 
     if (!rental.rowCount) return res.sendStatus(404);
     if (rental.rows[0].returnDate) return res.sendStatus(400);
