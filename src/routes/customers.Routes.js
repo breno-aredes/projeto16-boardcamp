@@ -5,10 +5,18 @@ import {
   attCustomers,
   listCustomersById,
 } from "../controllers/customersController.js";
+import { customerValidate } from "../middlewares/customerValidation.js";
+import { validateSchema } from "../middlewares/ValidateSchema.js";
+import { customerSchema } from "../models/customerSchema.js";
 
 export const customersRouter = Router();
 
-customersRouter.get("/customoers", listCustomers);
+customersRouter.get("/customers", listCustomers);
 customersRouter.get("/customers/:id?", listCustomersById);
-customersRouter.post("/customers", newCustomers);
+customersRouter.post(
+  "/customers",
+  customerValidate,
+  validateSchema(customerSchema),
+  newCustomers
+);
 customersRouter.put("/customers", attCustomers);
